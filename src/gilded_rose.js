@@ -3,54 +3,32 @@ class Shop {
     this.items = items;
   }
 
-  normalItemsQualityUpdate (item) {
-    if (item.name != 'Sulfuras, Hand of Ragnaros' && item.quality > 0) {
-      item.quality--;
-    }
-  }
-
-  backstageQualityUpdate (item) {
-    if (item.quality < 50) item.quality++;
-    if (item.name == 'Backstage passes to a TAFKAL80ETC concert') {
-      if (item.sellIn < 11 && item.quality < 50) item.quality++;
-      if (item.sellIn < 6 && item.quality < 50) item.quality++;
-    }
-  }
-
-  nonSulfurasItemUpdate (item) {
-    if (item.name != 'Sulfuras, Hand of Ragnaros') {
-      item.sellIn--;
-    }
+  agedBrie (item) {
+    if (item.name === 'Aged Brie' && item.sellIn < 0 && item.quality < 50) item.quality++;
   }
 
   updateQuality () {
     for (let item of this.items) {
-      if (item.name != 'Aged Brie' && item.name != 'Backstage passes to a TAFKAL80ETC concert') {
-        this.normalItemsQualityUpdate(item)
-      } else {
-        this.backstageQualityUpdate(item)
+      if (item.name == 'Sulfuras, Hand of Ragnaros') continue
+      if (item.name == 'Aged Brie') {
+        if (item.quality < 50) item.quality++;
       }
-      this.nonSulfurasItemUpdate(item)
+      if (item.name == 'Backstage passes to a TAFKAL80ETC concert') {
+        if (item.quality < 50) item.quality++;
+        if (item.sellIn < 11 && item.quality < 50) item.quality++;
+        if (item.sellIn < 6 && item.quality < 50) item.quality++;
+      }
 
-      if (item.sellIn < 0) {
-        if (item.name != 'Aged Brie') {
-          if (item.name != 'Backstage passes to a TAFKAL80ETC concert') {
-            if (item.quality > 0) {
-              if (item.name != 'Sulfuras, Hand of Ragnaros') {
-                item.quality--;
-              }
-            }
-          } else {
-            item.quality = 0;
-          }
-        } else {
-          if (item.quality < 50) {
-            item.quality++;
-          }
-        }
+      if (item.name == "+5 Dexterity Vest" || item.name == "Elixir of the Mongoose" || item.name == "Conjured Mana Cake") {
+        if (item.quality > 0) item.quality--;
       }
+
+      item.sellIn--;
+      this.agedBrie(item)
+      if (item.name == 'Aged Brie' && item.sellIn < 0) continue
+      if (item.name === 'Backstage passes to a TAFKAL80ETC concert' && item.sellIn < 0) item.quality = 0
+      if (item.quality > 0 && item.sellIn < 0) item.quality--;
     }
-
     return this.items;
   }
 }
@@ -61,6 +39,8 @@ class Item {
     this.sellIn = sellIn;
     this.quality = quality;
   }
+
+
 }
 
 module.exports = {
