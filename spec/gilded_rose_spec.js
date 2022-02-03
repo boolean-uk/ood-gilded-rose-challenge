@@ -2,12 +2,6 @@ var { Item, AgedBrie, NormalItem, Backstage, Sulfuras } = require('../src/items.
 const Shop = require('../src/gilded_rose.js')
 describe("Gilded Rose", function () {
 
-  it("should foo", function () {
-    const gildedRose = new Shop([new Item("foo", 0, 0)]);
-    const items = gildedRose.updateQuality();
-    expect(items[0].name).toEqual("foo");
-  });
-
   it("At the end of each day our system lowers both values for every item", function () {
     const gildedRose = new Shop([new NormalItem("+5 Dexterity Vest", 10, 20)]);
     const expected = [new NormalItem("+5 Dexterity Vest", 9, 19)]
