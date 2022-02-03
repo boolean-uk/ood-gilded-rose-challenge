@@ -1,9 +1,11 @@
+
 class Item {
   constructor(name, sellIn, quality){
     this.name = name;
     this.sellIn = sellIn;
     this.quality = quality;
   }
+
 }
 
 class NormalItem extends Item {
@@ -24,7 +26,7 @@ class NormalItem extends Item {
 }
 
 class AgedBrie extends Item {
-  constructor(name, sellIn, quality) {
+  constructor(sellIn, quality, name = "Aged Brie") {
     super(name, sellIn, quality)
 }
   updateDaily() {
@@ -41,7 +43,7 @@ class AgedBrie extends Item {
 }
 
 class Sulfuras extends Item {
-  constructor(name, sellIn, quality) {
+  constructor(sellIn, quality, name = "Sulfuras, Hand of Ragnaros") {
     super(name, sellIn, quality)
 }
  updateDaily() {}
@@ -61,10 +63,10 @@ if(this.sellIn < 0) {
 if(this.quality < 50) {
   this.quality += 1
 }
-if (this.sellIn < 10 && this.quality < 50) {
+if (this.sellIn < 11 && this.quality < 50) {
   this.quality += 1
 }
-if (this.sellIn < 5 && this.quality < 50) {
+if (this.sellIn < 6 && this.quality < 50) {
   this.quality += 1
 }
 }
@@ -93,14 +95,10 @@ class Shop {
   }
 
   updateQuality() {
-    for (let i = 0; i < this.items.length; i++) {
-        this.items[i].updateDaily()
-    }
-    return this.items
+    this.items.forEach(item => item.updateDaily())
   }
 
 }
-
 
 module.exports = {
   Item,
@@ -111,4 +109,3 @@ module.exports = {
   BackstagePasses,
   Shop
 }
-
