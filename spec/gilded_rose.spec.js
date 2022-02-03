@@ -126,4 +126,11 @@ it("Conjured degrade twice as fast - after sell in", function() {
   expect(test).toEqual(41);
 });
 
+it("Make sure conjured quality does not go below 0", function() {
+  const gildedRose = new Shop([ new Conjured("Conjured Mana Cake", 1, 1) ]);
+  gildedRose.updateQuality();
+  const test = gildedRose.items[0].quality
+  expect(test).toEqual(0);
+});
+
 });

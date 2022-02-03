@@ -80,10 +80,13 @@ class Conjured extends Item {
 updateDaily() {
   this.sellIn -= 1
 
-  if(this.quality > 0) {
+  if (this.quality === 1) {
+    this.quality--
+  }
+  if(this.quality - 2 >= 0) {
     this.quality -= 2
   }
-  if (this.sellIn < 0 && this.quality > 0) {
+  if (this.sellIn < 0 && this.quality - 2 >= 0) {
       this.quality -= 2
     }
   }
