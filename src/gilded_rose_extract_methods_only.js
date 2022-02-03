@@ -34,6 +34,18 @@ class Shop {
     }
   }
 
+  updateNormalItem(item) {
+    if (this.isNormalItem(item)) {
+      if (item.quality > 0) {
+        item.quality--;
+      }
+
+      if (item.sellIn < 0 && item.quality > 0) {
+        item.quality--;
+      }
+    }
+  }
+
   updateConjuredItem(item){
     if(item.name.includes('Conjured')) {
       if(item.quality === 1) {
@@ -48,31 +60,17 @@ class Shop {
    }
   }
 
-  updateNormalItem(item) {
-    if (this.isNormalItem(item)) {
-      if (item.quality > 0) {
-        item.quality--;
-      }
-
-      if (item.sellIn < 0 && item.quality > 0) {
-        item.quality--;
-      }
-    }
-  }
-
   updateBackstagePasses(item) {
     if (this.isBackstagePasses(item)) {
+      if (item.quality < 50) {
       item.quality++;
-      if (item.sellIn < 10) {
-        if (item.quality < 50) {
+      }
+      if (item.sellIn < 10 && item.quality < 50) {
           item.quality++;
         }
-      }
-      if (item.sellIn < 5) {
-        if (item.quality < 50) {
+      if (item.sellIn < 5 && item.quality < 50) {
           item.quality++;
         }
-      }
       if (item.sellIn < 0) {
         item.quality = 0;
       }
@@ -80,16 +78,13 @@ class Shop {
   }
 
   updateAgedBrie(item) {
-    if (this.isAgedBrie(item) && item.quality < 50) {
+    if (this.isAgedBrie(item)) {
+    if (item.quality < 50) {
       item.quality++;
     }
-
-    if (item.sellIn < 0) {
-      if (item.name === "Aged Brie") {
-        if (item.quality < 50) {
+    if (item.sellIn < 0 && item.quality < 50) {
           item.quality++;
         }
-      }
     }
   }
 
@@ -107,3 +102,6 @@ module.exports = {
   Item,
   Shop,
 };
+
+
+// to do - eslint and configure extract methods solution.
