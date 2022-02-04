@@ -7,9 +7,7 @@ class Item {
 }
 
 class NormalItem extends Item {
-  constructor(name, sellIn, quality) {
-    super(name, sellIn, quality);
-  }
+
   updateDaily() {
     this.sellIn -= 1;
 
@@ -46,9 +44,6 @@ class Sulfuras extends Item {
 }
 
 class BackstagePasses extends Item {
-  constructor(name, sellIn, quality) {
-    super(name, sellIn, quality);
-  }
   updateDaily() {
     this.sellIn -= 1;
 
@@ -69,9 +64,6 @@ class BackstagePasses extends Item {
 }
 
 class Conjured extends Item {
-  constructor(name, sellIn, quality) {
-    super(name, sellIn, quality);
-  }
   updateDaily() {
     this.sellIn -= 1;
 
