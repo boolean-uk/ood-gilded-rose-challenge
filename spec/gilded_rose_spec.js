@@ -6,11 +6,9 @@ describe("Gilded Rose", () => {
     vest = new Item("+5 Dexterity Vest", 10, 20)
     brie = new Item("Aged Brie", 2, 0)
     elixir = new Item("Elixir of the Mongoose", 5, 7)
-    sulfuras1 = new Item("Sulfuras, Hand of Ragnaros", -1, 80)
-    // sulfuras2 = new Item("Sulfuras, Hand of Ragnaros", -1, 80)
+    sulfuras1 = new Item("Sulfuras, Hand of Ragnaros", 0, 80)
     pass1 = new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20)
     pass2 = new Item("Backstage passes to a TAFKAL80ETC concert", 10, 49)
-    // pass3 = new Item("Backstage passes to a TAFKAL80ETC concert", 5, 49)
     conjuredCake = new Item("Conjured Mana Cake", 3, 6)
     conjuredCake2 = new Item("Conjured Mana Cake", 1, 30)
 
