@@ -1,33 +1,42 @@
-## Requirements
 
+# Domain Model
+
+## Class
+Item
+
+### Requirements
 - All items have a SellIn value which denotes the number of days we have to sell the item
 - All items have a Quality value which denotes how valuable the item is
-- At the end of each day our system lowers both values for every item
-
-- Once the sell by date has passed, Quality degrades twice as fast
-- The Quality of an item is never negative
-- "Aged Brie" actually increases in Quality the older it gets
-- The Quality of an item is never more than 50
-- "Sulfuras", being a legendary item, never has to be sold or decreases in Quality
-- "Backstage passes", like aged brie, increases in Quality as its SellIn value approaches;
-  Quality increases by 2 when there are 10 days or less and by 3 when there are 5 days or less but
-  Quality drops to 0 after the concert
-
-- "Conjured" items degrade in Quality twice as fast as normal items
-
 - do not alter the Item class or Items property
-- an item can never have its Quality increase above 50, however "Sulfuras" is a
-  legendary item and as such its Quality is 80 and it never alters.
 
-
-## Domain Model
-
-### Class
-Item
-### Propteries
+### Properties
 - name @String
 - sellIn @Number (number of days we have to sell the item)
 - quality @Number (the value of the item)
-### Methods
 
-### Class
+---
+
+## Class
+Shop
+
+### Requirements
+#### "SellIn" related
+- At the end of each day our system lowers sellIn for every item 
+- Once the sell by date has passed, Quality degrades twice as fast
+
+
+#### "Quality" related
+- At the end of each day our system lowers quality for every item
+   EXCEPT "aged brie": it increases its quality
+   EXCEPT "Sulfuras": it  never has to be sold and always quality = 80
+   EXCEPT "Backstage": it increases in quality as its SellIn value approaches.
+   Quality increases by 2 when there are 10 days or less and by 3 when there are 5 days or les Quality drops to 0 after the concert
+   EXCEPT "conjured": it lowers quality twice as fast as normal items
+- The Quality of an item is never negative
+- The Quality of an item is never more than 50
+
+
+### Properties
+- items @Array[@Item{name, sellIn, quality}]
+  
+### Methods
