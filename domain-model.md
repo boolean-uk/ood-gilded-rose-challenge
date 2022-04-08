@@ -19,4 +19,15 @@
 - an item can never have its Quality increase above 50, however "Sulfuras" is a
   legendary item and as such its Quality is 80 and it never alters.
 
-  
+
+## Domain Model
+
+### Class
+Item
+### Propteries
+- name @String
+- sellIn @Number (number of days we have to sell the item)
+- quality @Number (the value of the item)
+### Methods
+
+### Class
