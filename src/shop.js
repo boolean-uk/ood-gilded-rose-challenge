@@ -4,9 +4,7 @@ class Shop {
   }
 
   updateQuality() {
-    for (const item of this.items) item.update()
-
-    return this.items
+    return this.items.map(el => el.update())
   }
 }
 

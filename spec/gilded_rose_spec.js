@@ -1,4 +1,4 @@
-const Shop = require('../src/gilded_rose.js')
+const Shop = require('../src/shop.js')
 const StandardItem = require('../src/standardItem.js')
 const AgedBrie = require('../src/agedBrie.js')
 const BackstagePass = require('../src/backstagePass.js')
