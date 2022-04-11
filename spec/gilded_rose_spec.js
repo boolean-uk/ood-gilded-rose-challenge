@@ -1,4 +1,5 @@
-const {Shop, Item} = require('../src/gilded_rose.js');
+const Shop = require('../src/gilded_rose.js')
+const Item = require('../src/item.js')
 
 describe("Gilded Rose", () => {
   let shop, vest, brie, elixir, sulfuras1, pass1, pass2, conjuredCake, conjuredCake2
