@@ -12,26 +12,6 @@ class Shop {
     this.normal = new Normal()
   }
 
-  updateBackstagePass(item) {
-    item.sellIn--
-    if (item.quality < 50) item.quality++
-    if (item.sellIn < 11 && item.quality < 50) item.quality++
-    if (item.sellIn < 6 && item.quality < 50) item.quality++
-    if (item.sellIn < 0) item.quality = 0
-  }
-
-  conjuredItem(item) {
-    item.sellIn--
-    if (item.quality < 50 && item.quality > 0) item.quality -= 2
-    if (item.sellIn <= 0 && item.quality > 0) item.quality -= 2
-  }
-
-  normalCheeses(item) {
-    item.sellIn--
-    if (item.quality < 50 && item.quality > 0) item.quality--
-    if (item.sellIn <= 0 && item.quality > 0) item.quality--
-  }
-
   updateQuality() {
     for (let i = 0; i < this.items.length; i++) {
       const item = this.items[i]

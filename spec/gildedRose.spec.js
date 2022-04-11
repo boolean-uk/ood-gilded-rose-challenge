@@ -42,7 +42,9 @@ describe('Backstage passes to a TAFKAL80ETC concert', () => {
     )
     const items = [backstage]
     const shop = new Shop(items)
-    shop.updateBackstagePass(backstage)
+    shop.updateQuality()
+
+    // shop.updateBackstagePass(backstage)
 
     expect(backstage.sellIn).toEqual(13)
     expect(backstage.quality).toEqual(25)
@@ -56,7 +58,9 @@ describe('Backstage passes to a TAFKAL80ETC concert', () => {
     )
     const items = [backstage]
     const shop = new Shop(items)
-    shop.updateBackstagePass(backstage)
+    shop.updateQuality()
+
+    // shop.updateBackstagePass(backstage)
 
     expect(backstage.sellIn).toEqual(7)
     expect(backstage.quality).toEqual(31)
@@ -70,7 +74,9 @@ describe('Backstage passes to a TAFKAL80ETC concert', () => {
     )
     const items = [backstage]
     const shop = new Shop(items)
-    shop.updateBackstagePass(backstage)
+    shop.updateQuality()
+
+    // shop.updateBackstagePass(backstage)
 
     expect(backstage.sellIn).toEqual(4)
     expect(backstage.quality).toEqual(38)
