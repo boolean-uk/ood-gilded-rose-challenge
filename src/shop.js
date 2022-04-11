@@ -30,8 +30,8 @@ class Shop {
   updateItem(item) {
     item.sellIn--
     if (item.quality <= 50) item.quality--
-    if (item.quality <= 0) item.quality = 0
     if (item.sellIn <= 0) item.quality--
+    if (item.quality < 0) item.quality = 0
   }
 
   updateQuality() {
@@ -53,5 +53,3 @@ class Shop {
 }
 
 module.exports = Shop
-
-// checkquality to see if the quality is ok / when its not sulfuras!
