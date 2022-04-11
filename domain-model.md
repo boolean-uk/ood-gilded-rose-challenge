@@ -40,10 +40,10 @@ Shop
 - items @Array[@Item{name, sellIn, quality}]
   
 ### Methods
-isValidQuality():  The Quality of an item is never negative and is never more than 50
-agedBrieQuality(): increase the item's quality by 1, after sellIn <= 0 it increase quality by 2
-sulfurasQuality(): the quality is always 80, sellIn is always fixed
+isValidQuality():  The Quality of an item is never negative and is never more than 50 
+updateAgedBrie(): increase the item's quality by 1, after sellIn <= 0 it increase quality by 2
+updateSulfuras(): the quality is always 80, sellIn is always fixed
+updateBackstage(): it increases in quality as its SellIn value approaches.
+   Quality increases by 2 when there are 10 days or less and by 3 when there are 5 days or less Quality drops to 0 after the concert
 decreaseQuality(): decrease the item's quality by 1
 decreaseQualityDouble(): decrease the item's quality twice as fast as normal items (after sellIn <=0, includes "conjured")
-backstageQuality(): it increases in quality as its SellIn value approaches.
-   Quality increases by 2 when there are 10 days or less and by 3 when there are 5 days or less Quality drops to 0 after the concert
