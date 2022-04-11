@@ -11,7 +11,8 @@ class Shop {
     this.items = items;
   }
   updateQuality() {
-    for (var i = 0; i < this.items.length; i++) {
+
+    for (let i = 0; i < this.items.length; i++) {
       if (this.items[i].name != 'Aged Brie' && this.items[i].name != 'Backstage passes to a TAFKAL80ETC concert') {
         if (this.items[i].quality > 0) {
           if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
@@ -55,8 +56,9 @@ class Shop {
           }
         }
       }
-    }
+  
 
+    }
     return this.items;
   }
 }
@@ -64,3 +66,13 @@ module.exports = {
   Item,
   Shop
 }
+
+const agedBrie = new Item('Aged Brie',2,4)
+const shop = new Shop([agedBrie])
+shop.updateQuality()
+shop.updateQuality()
+shop.updateQuality()
+
+console.log(agedBrie);
+
+console.log(shop);

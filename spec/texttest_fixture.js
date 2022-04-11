@@ -15,7 +15,8 @@ const items = [
   new Item("Conjured Mana Cake", 3, 6),
 ];
 
-const days = Number(process.argv[2]) || 2;
+
+const days = Math.max(...items.map(item => item.sellIn))|| 2;
 const gildedRose = new Shop(items);
 
 console.log("OMGHAI!");
