@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Gilded Rose kata in Javascript with Jasmine",
   "scripts": {
-    "test": "jasmine"
+    "test": "jasmine",
+    "flint": "npx eslint ./src ./spec --fix"
   },
   "repository": {
     "type": "git",
@@ -43,5 +44,8 @@
       ]
     ],
     "plugins": []
+  },
+  "dependencies": {
+    "@types/jasmine": "^4.0.2"
   }
 }
