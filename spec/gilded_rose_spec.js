@@ -1,7 +1,7 @@
 const Item = require('../src/item')
 const Shop = require('../src/shop')
 
-describe('Gilded Rose', () => {
+fdescribe('Gilded Rose', () => {
   it('should foo', () => {
     const gildedRose = new Shop([new Item('foo', 0, 0)])
     const items = gildedRose.updateQuality()
@@ -35,7 +35,7 @@ describe('Gilded Rose', () => {
     expect(gildedRose.isValidQuality(item)).toEqual(false)
   })
 
-  fit('returns false as item has quality more than 50', () => {
+  it('returns false as item has quality more than 50', () => {
     // setup
     const item = new Item('Conjured Mana Cake', 3, 51)
     const gildedRose = new Shop()
@@ -60,7 +60,6 @@ describe('Gilded Rose', () => {
     const backstage = new Item('Backstage passes to a TAFKAL80ETC concert', 15, 20)
     const gildedRose = new Shop([backstage])
     gildedRose.updateQuality()
-
     // verify
     expect(gildedRose.items[0].sellIn).toEqual(14)
     expect(gildedRose.items[0].quality).toEqual(21)
@@ -95,7 +94,7 @@ describe('Gilded Rose', () => {
     gildedRose.updateQuality()
 
     // verify
-    expect(gildedRose.items[0].sellIn).toEqual(-2)
+    expect(gildedRose.items[0].sellIn).toEqual(-1)
     expect(gildedRose.items[0].quality).toEqual(0)
   })
 

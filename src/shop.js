@@ -29,6 +29,10 @@ class Shop {
     if (item.quality <= 0) item.quality = 0
   }
 
+  updateSulfuras(item) {
+    return item
+  }
+
   updateItem(item) {
     item.sellIn--
     item.quality--
@@ -39,10 +43,18 @@ class Shop {
   updateQuality() {
     for (const item of this.items) {
       if (!this.isValidQuality(item)) return 'invalid quality'
-      if (item.name === 'Aged Brie') this.updateAgedBrie(item)
-      if (item.name === 'Backstage passes to a TAFKAL80ETC concert') this.updateBackstage(item)
-      if (item.name.includes('Conjured')) this.updateConjured(item)
-      if (item.name !== 'Sulfuras, Hand of Ragnaros') this.updateItem(item)
+
+      if (item.name === 'Aged Brie') {
+        this.updateAgedBrie(item)
+      } else if (item.name === 'Backstage passes to a TAFKAL80ETC concert') {
+        this.updateBackstage(item)
+      } else if (item.name === 'Sulfuras, Hand of Ragnaros') {
+        this.updateSulfuras(item)
+      } else if (item.name.includes('Conjured')) {
+        this.updateConjured(item)
+      } else {
+        this.updateItem(item)
+      }
     }
     return this.items
   }
