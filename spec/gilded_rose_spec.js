@@ -15,6 +15,15 @@ describe("Gilded Rose", function() {
     // verify
     expect(gildedRose.items[0]).toEqual(result)
   });
+  it("Aged Brie actually increases in Quality by 2 after 0 sell in date", function() {
+    //set up
+    const gildedRose = new Shop([ new Item('Aged Brie', 0, 0) ]);
+   gildedRose.updateQuality();
+   gildedRose.updateQuality();
+    const result = new Item('Aged Brie', -2, 4) 
+    // verify
+    expect(gildedRose.items[0]).toEqual(result)
+  });
   it("Once the sell by date has passed, Quality degrades twice as fast", function() {
     //set up
    
@@ -51,7 +60,7 @@ describe("Gilded Rose", function() {
       new Item("Backstage passes to a TAFKAL80ETC concert", 5, 49),
     
       // This Conjured item does not work properly yet
-      // new Item("Conjured Mana Cake", 3, 6)
+      new Item("Conjured Mana Cake", 3, 6)
   
     ];
    
@@ -68,6 +77,7 @@ describe("Gilded Rose", function() {
       new Item("Backstage passes to a TAFKAL80ETC concert", 13, 22),
       new Item("Backstage passes to a TAFKAL80ETC concert", 8, 50),
       new Item("Backstage passes to a TAFKAL80ETC concert", 3, 50),
+      new Item("Conjured Mana Cake", 1, 2)
     ]
 
     expect(items).toEqual(result);
@@ -141,7 +151,7 @@ describe("Gilded Rose", function() {
     for (let day = 0; day < days; day++) {
       // console.log(`\n-------- day ${day} --------`);
       // console.log("name, sellIn, quality");
-      items.forEach(item => console.log(`${item.name}, ${item.sellIn}, ${item.quality}`));
+      // items.forEach(item => console.log(`${item.name}, ${item.sellIn}, ${item.quality}`));
       gildedRose.updateQuality();
     }
    //verify
