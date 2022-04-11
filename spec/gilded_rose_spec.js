@@ -1,238 +1,154 @@
-var {Shop, Item} = require('../src/gilded_rose.js');
+const Shop = require('../src/gilded_rose.js');
+const Item = require('../src/Item.js')
+const AgedBrie = require('../src/AgedBrie')
+const BackstagePass = require('../src/BackstagePass')
+const Conjured = require('../src/Conjured')
+const NormalItems = require('../src/NormalItems')
+const Sulfuras = require('../src/Sulfuras')
+
+console.log(NormalItems);
+
 describe("Gilded Rose", function() {
+let items;
+let gildedRose;
+ beforeEach(() => {
+     items = [
+        new NormalItems("+5 Dexterity Vest", 10, 20),
+        new AgedBrie("Aged Brie", 2, 0),
+        new NormalItems("Elixir of the Mongoose", 5, 7),
+        new Sulfuras("Sulfuras, Hand of Ragnaros", 0, 80),
+        new Sulfuras("Sulfuras, Hand of Ragnaros", -1, 80),
+        new BackstagePass("Backstage passes to a TAFKAL80ETC concert", 15, 20),
+        new BackstagePass("Backstage passes to a TAFKAL80ETC concert", 10, 49),
+        new BackstagePass("Backstage passes to a TAFKAL80ETC concert", 5, 49),
+        new Conjured("Conjured Mana Cake", 3, 6)
+      ];
+      gildedRose = new Shop(items);
+   });
 
   it("should return the name of the item", function() {
-    const gildedRose = new Shop([ new Item('Aged Brie', 2, 0) ]);
-    const items = gildedRose.updateQuality();
-    expect(items[0].name).toEqual('Aged Brie');
+     gildedRose.updateQuality();
+    expect(items[1].name).toEqual('Aged Brie');
   });
   it("Aged Brie actually increases in Quality by 1 the older it gets", function() {
     //set up
-    const gildedRose = new Shop([ new Item('Aged Brie', 2, 0) ]);
    gildedRose.updateQuality();
    gildedRose.updateQuality();
-    const result = new Item('Aged Brie', 0, 2) 
+
     // verify
-    expect(gildedRose.items[0]).toEqual(result)
+    expect(gildedRose.items[1].quality).toEqual(2)
+    expect(gildedRose.items[1].sellIn).toEqual(0)
   });
   it("Aged Brie actually increases in Quality by 2 after 0 sell in date", function() {
     //set up
-    const gildedRose = new Shop([ new Item('Aged Brie', 0, 0) ]);
    gildedRose.updateQuality();
    gildedRose.updateQuality();
-    const result = new Item('Aged Brie', -2, 4) 
+   gildedRose.updateQuality();
+
     // verify
-    expect(gildedRose.items[0]).toEqual(result)
+    expect(gildedRose.items[1].quality).toEqual(4)
+    expect(gildedRose.items[1].sellIn).toEqual(-1)
   });
   it("Once the sell by date has passed, Quality degrades twice as fast", function() {
     //set up
-   
-     const items = [
-    new Item("+5 Dexterity Vest", 0, 10),
-    new Item("Aged Brie", 0, 2),
-    new Item("Elixir of the Mongoose", 2, 6),
-    ]
-    const gildedRose = new Shop(items);
-    gildedRose.updateQuality();
-    gildedRose.updateQuality();
-    gildedRose.updateQuality();
- 
-   //verify
-    const result =  [
-      new Item("+5 Dexterity Vest", -3, 4),
-      new Item("Aged Brie", -3, 8),
-      new Item("Elixir of the Mongoose", -1, 2),
-    ]
-    
-    expect(items).toEqual(result);
+    for(let i = 0; i <= 11;i++) gildedRose.updateQuality();
+    //verify
+    expect(items[0].sellIn).toEqual(-2);
+    expect(items[0].quality).toEqual(6);
+    expect(items[1].sellIn).toEqual(-10);
+    expect(items[1].quality).toEqual(22);
+    expect(items[8].sellIn).toEqual(-9);
+    expect(items[8].quality).toEqual(0);
   });
 
   
   it("shows the expected outcome with 2 days (without conjured item)", function() {
-    let items = [
-      new Item("+5 Dexterity Vest", 10, 20),
-      new Item("Aged Brie", 2, 0),
-      new Item("Elixir of the Mongoose", 5, 7),
-      new Item("Sulfuras, Hand of Ragnaros", 0, 80),
-      new Item("Sulfuras, Hand of Ragnaros", -1, 80),
-      new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20),
-      new Item("Backstage passes to a TAFKAL80ETC concert", 10, 49),
-      new Item("Backstage passes to a TAFKAL80ETC concert", 5, 49),
-    
-      // This Conjured item does not work properly yet
-      new Item("Conjured Mana Cake", 3, 6)
-  
-    ];
-   
-    const gildedRose = new Shop(items);
     gildedRose.updateQuality();
     gildedRose.updateQuality();
- 
-    const result =  [
-      new Item("+5 Dexterity Vest", 8, 18),
-      new Item("Aged Brie", 0, 2),
-      new Item("Elixir of the Mongoose", 3, 5),
-      new Item("Sulfuras, Hand of Ragnaros", 0, 80),
-      new Item("Sulfuras, Hand of Ragnaros", -1, 80),
-      new Item("Backstage passes to a TAFKAL80ETC concert", 13, 22),
-      new Item("Backstage passes to a TAFKAL80ETC concert", 8, 50),
-      new Item("Backstage passes to a TAFKAL80ETC concert", 3, 50),
-      new Item("Conjured Mana Cake", 1, 2)
-    ]
-
-    expect(items).toEqual(result);
+    expect(items[0].sellIn).toEqual(8);
+    expect(items[0].quality).toEqual(18);
+    expect(items[1].sellIn).toEqual(0);
+    expect(items[1].quality).toEqual(2);
+    expect(items[2].sellIn).toEqual(3);
+    expect(items[2].quality).toEqual(5);
+    expect(items[3].sellIn).toEqual(0);
+    expect(items[3].quality).toEqual(80);
+    expect(items[4].sellIn).toEqual(-1);
+    expect(items[4].quality).toEqual(80);
+    expect(items[5].sellIn).toEqual(13);
+    expect(items[5].quality).toEqual(22);
+    expect(items[6].sellIn).toEqual(8);
+    expect(items[6].quality).toEqual(50);
+    expect(items[7].sellIn).toEqual(3);
+    expect(items[7].quality).toEqual(50);
+    expect(items[8].sellIn).toEqual(1);
+    expect(items[8].quality).toEqual(2);
     
   });
 
   it("The Quality of an item is never negative", function() {
     //set up
    
-    const days = 5;
+    for(let i = 0; i <= 19;i++) gildedRose.updateQuality();
 
-     const items = [
-    new Item("+5 Dexterity Vest", 5, 1),
-    new Item("Aged Brie", 2, 2),
-    new Item("Elixir of the Mongoose", 5, 1),
-    new Item("Backstage passes to a TAFKAL80ETC concert", 3, 50),
-    ]
-    const gildedRose = new Shop(items);
-    
-    for (let day = 0; day < days; day++) {
-      console.log(`\n-------- day ${day} --------`);
-      console.log("name, sellIn, quality");
-      items.forEach(item => console.log(`${item.name}, ${item.sellIn}, ${item.quality}`));
-      gildedRose.updateQuality();
-    }
    //verify
-    const result =  [
-      new Item("+5 Dexterity Vest", 0, 0),
-      new Item("Aged Brie", -3, 10),
-      new Item("Elixir of the Mongoose", 0, 0),
-      new Item("Backstage passes to a TAFKAL80ETC concert", -2, 0),
-    ]
-    
-    expect(items).toEqual(result);
+    expect(items[0].sellIn).toEqual(-10);
+    expect(items[0].quality).toEqual(0);
+    expect(items[8].sellIn).toEqual(-17);
+    expect(items[8].quality).toEqual(0);
   });
   it("The Quality of an item is never more than 50", function() {
     //set up
    
-    const days = 5;
+    for(let i = 0; i <= 26;i++) gildedRose.updateQuality();
 
-     const items = [
-    new Item("Aged Brie", 2, 48),
-    new Item("Backstage passes to a TAFKAL80ETC concert", 3, 50),
-    ]
-    const gildedRose = new Shop(items);
-    
-    for (let day = 0; day < days; day++) {
-      console.log(`\n-------- day ${day} --------`);
-      console.log("name, sellIn, quality");
-      items.forEach(item => console.log(`${item.name}, ${item.sellIn}, ${item.quality}`));
-      gildedRose.updateQuality();
-    }
-   //verify
-    const result =  [
-      new Item("Aged Brie", -3, 50),
-      new Item("Backstage passes to a TAFKAL80ETC concert", -2, 0),
-    ]
-    
-    expect(items).toEqual(result);
+  //verify
+    expect(items[1].sellIn).toEqual(-25);
+    expect(items[1].quality).toEqual(50);
+    expect(items[7].sellIn).toEqual(-22);
+    expect(items[7].quality).toEqual(0);
   });
   it("Sulfuras, being a legendary item, never has to be sold or decreases in Quality", function() {
     //set up
-   
-    const days = 100;
-
-     const items = [
-      new Item("Sulfuras, Hand of Ragnaros", 0, 80),
-    ]
-    const gildedRose = new Shop(items);
-    
-    for (let day = 0; day < days; day++) {
-      // console.log(`\n-------- day ${day} --------`);
-      // console.log("name, sellIn, quality");
-      // items.forEach(item => console.log(`${item.name}, ${item.sellIn}, ${item.quality}`));
-      gildedRose.updateQuality();
-    }
+    for(let i = 0; i <= 26;i++) gildedRose.updateQuality();
    //verify
-    const result =  [
-      new Item("Sulfuras, Hand of Ragnaros", 0, 80),
-    ]
-    
-    expect(items).toEqual(result);
+    expect(items[3].sellIn).toEqual(0);
+    expect(items[3].quality).toEqual(80);
   });
 
 });
 
 describe("Backstage Passes",function() {
+let items;
+let gildedRose;
+ beforeEach(() => {
+     items = [new BackstagePass("Backstage passes to a TAFKAL80ETC concert", 15, 20)];
+      gildedRose = new Shop(items);
+   });
+
   it("Quality increases by 2 when there are 10 days or less", function() {
     //set up
-   
-    const days = 4;
-
-     const items = [
-      new Item("Backstage passes to a TAFKAL80ETC concert", 12, 8),
-    ]
-    const gildedRose = new Shop(items);
-    
-    for (let day = 0; day < days; day++) {
-      console.log(`\n-------- day ${day} --------`);
-      console.log("name, sellIn, quality");
-      items.forEach(item => console.log(`${item.name}, ${item.sellIn}, ${item.quality}`));
-      gildedRose.updateQuality();
-    }
+    for(let i = 0; i <= 5;i++) gildedRose.updateQuality();
    //verify
-    const result =  [
-      new Item("Backstage passes to a TAFKAL80ETC concert", 8, 14),
-    ]
-    
-    expect(items).toEqual(result);
+   
+    expect(items[0].sellIn).toEqual(9);
+    expect(items[0].quality).toEqual(27);
   });
   it("Quality increases by 3 when there are 5 days or less", function() {
     //set up
-   
-    const days = 4;
-
-     const items = [
-      new Item("Backstage passes to a TAFKAL80ETC concert", 8, 8),
-    ]
-    const gildedRose = new Shop(items);
-    
-    for (let day = 0; day < days; day++) {
-      console.log(`\n-------- day ${day} --------`);
-      console.log("name, sellIn, quality");
-      items.forEach(item => console.log(`${item.name}, ${item.sellIn}, ${item.quality}`));
-      gildedRose.updateQuality();
-    }
+    for(let i = 0; i <= 10;i++) gildedRose.updateQuality();
    //verify
-    const result =  [
-      new Item("Backstage passes to a TAFKAL80ETC concert", 4, 17),
-    ]
-    
-    expect(items).toEqual(result);
+
+   expect(items[0].sellIn).toEqual(4);
+    expect(items[0].quality).toEqual(38);
   });
   it("Quality drops 0 after the concert", function() {
     //set up
+      for(let i = 0; i <= 15;i++) gildedRose.updateQuality();
+      //verify
    
-    const days = 4;
-
-     const items = [
-      new Item("Backstage passes to a TAFKAL80ETC concert", 3, 40),
-    ]
-    const gildedRose = new Shop(items);
-    
-    for (let day = 0; day < days; day++) {
-      console.log(`\n-------- day ${day} --------`);
-      console.log("name, sellIn, quality");
-      items.forEach(item => console.log(`${item.name}, ${item.sellIn}, ${item.quality}`));
-      gildedRose.updateQuality();
-    }
-   //verify
-    const result =  [
-      new Item("Backstage passes to a TAFKAL80ETC concert", -1, 0),
-    ]
-    
-    expect(items).toEqual(result);
+      expect(items[0].sellIn).toEqual(-1);
+       expect(items[0].quality).toEqual(0);
   });
 
 }) 
