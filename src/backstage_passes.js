@@ -1,6 +1,4 @@
 class BackstagePass {
-  // constructor() {}
-
   updateBackstagePass(item) {
     if (item.sellIn < 0) {
       item.sellIn--

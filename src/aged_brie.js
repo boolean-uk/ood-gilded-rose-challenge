@@ -1,6 +1,4 @@
 class AgedBrie {
-  //   constructor() {}
-
   updateAgedBrie(item) {
     item.sellIn--
     if (item.quality < 50) {

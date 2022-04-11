@@ -1,6 +1,4 @@
 class Standard {
-  // constructor() {}
-
   updateStandard(item) {
     if (item.quality === 0) {
       item.sellIn--
