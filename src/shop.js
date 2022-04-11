@@ -17,11 +17,20 @@ class Shop {
     if (item.sellIn <= 0) item.quality++
   }
 
+  updateBackstage(item) {
+      item.sellIn--
+      item.quality++
+      if (item.sellIn <= 10) item.quality++
+      if (item.sellIn <= 5) item.quality++
+      if (item.sellIn < 0) item.quality = 0
+  }
+
   updateQuality() {
     // loop through the items array
   for (const item of this.items) {
-      // if the item is NOT "aged brie" nor "Backstage passes to a ta--- concert",
-      if ( item.name === "Aged Brie" ) this.updateAgedBrie(item)
+      if (item.name === 'Aged Brie') this.updateAgedBrie(item)
+      if (item.name === 'Backstage passes to a TAFKAL80ETC concert') this.updateBackstage(item)
+
        
     //     this.items[i].name != 'Backstage passes to a TAFKAL80ETC concert') {
     //     // then, if the item's quality is more than 0,
@@ -99,8 +108,7 @@ class Shop {
     //       }
     //     }
     //   }
-    // }
-}
+    }
 return this.items
  }
 }

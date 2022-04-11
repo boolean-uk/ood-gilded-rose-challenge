@@ -43,14 +43,47 @@ describe('Gilded Rose', () => {
     expect(gildedRose.items[0].quality).toEqual(1)
   })
 
-  fit('decreases agedBries sellIn and increases double of quality', () =>{
+  it('decreases backstage sellIn and increases quality', () =>{
     // setup
-    const agedBrie = new Item('Aged Brie', 0, 0)
-    const gildedRose = new Shop([agedBrie])
+    const backstage = new Item('Backstage passes to a TAFKAL80ETC concert', 15, 20)
+    const gildedRose = new Shop([backstage])
     gildedRose.updateQuality()
 
     // verify
-    expect(gildedRose.items[0].sellIn).toEqual(-1)
-    expect(gildedRose.items[0].quality).toEqual(2)
+    expect(gildedRose.items[0].sellIn).toEqual(14)
+    expect(gildedRose.items[0].quality).toEqual(21)
+  })
+
+  it('decreases backstage sellIn and increases double of quality', () =>{
+    // setup
+    const backstage = new Item('Backstage passes to a TAFKAL80ETC concert', 10, 20)
+    const gildedRose = new Shop([backstage])
+    gildedRose.updateQuality()
+
+    // verify
+    expect(gildedRose.items[0].sellIn).toEqual(9)
+    expect(gildedRose.items[0].quality).toEqual(22)
+  })
+
+  it('decreases backstage sellIn and increases triple of quality', () =>{
+    // setup
+    const backstage = new Item('Backstage passes to a TAFKAL80ETC concert', 5, 20)
+    const gildedRose = new Shop([backstage])
+    gildedRose.updateQuality()
+
+    // verify
+    expect(gildedRose.items[0].sellIn).toEqual(4)
+    expect(gildedRose.items[0].quality).toEqual(23)
+  })
+
+  it('decreases backstage sellIn and drops to quality 0', () =>{
+    // setup
+    const backstage = new Item('Backstage passes to a TAFKAL80ETC concert', 0, 20)
+    const gildedRose = new Shop([backstage])
+    gildedRose.updateQuality()
+
+    // verify
+    expect(gildedRose.items[0].sellIn).toEqual(-2)
+    expect(gildedRose.items[0].quality).toEqual(0)
   })
 })
