@@ -1,4 +1,6 @@
-class ConjuredCake extends standardItem {
+const StandardItem = require('./standardItem')
+
+class ConjuredCake extends StandardItem {
   update() {
     if (this.quality > 0) {
       this.quality -= 2
@@ -9,3 +11,4 @@ class ConjuredCake extends standardItem {
     this.updateSellIn()
   }
 }
+module.exports = ConjuredCake

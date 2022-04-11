@@ -1,6 +1,6 @@
 const BackstagePass = require('../src/backstagePass')
 
-fdescribe('Backstage Pass', () => {
+describe('Backstage Pass', () => {
   let pass1, pass2
   beforeEach(() => {
     pass1 = new BackstagePass("Backstage passes to a TAFKAL80ETC concert", 15, 20)

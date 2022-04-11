@@ -3,6 +3,8 @@ const Item = require('../src/item.js')
 const StandardItem = require('../src/standardItem.js')
 const AgedBrie = require('../src/agedBrie.js')
 const BackstagePass = require('../src/backstagePass.js')
+const ConjuredCake = require('../src/conjuredCake')
+const Sulfuras = require('../src/sulfuras.js')
 
 describe("Gilded Rose", () => {
   let shop, vest, brie, elixir, sulfuras1, pass1, pass2, conjuredCake, conjuredCake2
@@ -10,17 +12,16 @@ describe("Gilded Rose", () => {
     vest = new StandardItem("+5 Dexterity Vest", 10, 20)
     brie = new AgedBrie("Aged Brie", 2, 0)
     elixir = new StandardItem("Elixir of the Mongoose", 5, 7)
-    sulfuras1 = new Item("Sulfuras, Hand of Ragnaros", 0, 80)
+    sulfuras1 = new Sulfuras("Sulfuras, Hand of Ragnaros", 0, 80)
     pass1 = new BackstagePass("Backstage passes to a TAFKAL80ETC concert", 15, 20)
     pass2 = new BackstagePass("Backstage passes to a TAFKAL80ETC concert", 10, 49)
-    conjuredCake = new Item("Conjured Mana Cake", 3, 6)
-    conjuredCake2 = new Item("Conjured Mana Cake", 1, 30)
+    conjuredCake = new ConjuredCake("Conjured Mana Cake", 3, 6)
+    conjuredCake2 = new ConjuredCake("Conjured Mana Cake", 1, 30)
 
-    // shop = new Shop([vest, brie, elixir, sulfuras1, pass1, pass2, conjuredCake, conjuredCake2])
-    shop = new Shop([vest, brie, elixir, pass1, pass2])
+    shop = new Shop([vest, brie, elixir, sulfuras1, pass1, pass2, conjuredCake, conjuredCake2])
   })
 
-  fdescribe("+5 Dexterity Vest", () => {
+  describe("+5 Dexterity Vest", () => {
     it("always decrease sellIn by 1", () => {
       const days = 5
       for (let i = 0; i < days; i++) {
@@ -67,7 +68,7 @@ describe("Gilded Rose", () => {
     })
   })
 
-  fdescribe("Aged Brie", () => {
+  describe("Aged Brie", () => {
     it("always decrease sellIn by 1", () => {
       const days = 1
       for (let i = 0; i < days; i++) {
@@ -114,7 +115,7 @@ describe("Gilded Rose", () => {
     })
   })
 
-  fdescribe("Elixir of the Mongoose", () => {
+  describe("Elixir of the Mongoose", () => {
     it("always decrease sellIn by 1", () => {
       const days = 5
       for (let i = 0; i < days; i++) {
@@ -181,7 +182,7 @@ describe("Gilded Rose", () => {
     })
   })
 
-  fdescribe("Backstage passes to a TAFKAL80ETC concert", () => {
+  describe("Backstage passes to a TAFKAL80ETC concert", () => {
     it("always decrease sellIn by 1", () => {
       const days = 5
       for (let i = 0; i < days; i++) {
