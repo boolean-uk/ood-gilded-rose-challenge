@@ -1,4 +1,6 @@
-class AgedBrie extends standardItem {
+const StandardItem = require('./standardItem')
+
+class AgedBrie extends StandardItem {
   update() {
     this.updateSellIn()
     if (this.quality < 50) {
@@ -9,3 +11,4 @@ class AgedBrie extends standardItem {
     }
   }
 }
+module.exports = AgedBrie

@@ -1,12 +1,13 @@
 const Shop = require('../src/gilded_rose.js')
 const Item = require('../src/item.js')
 const StandardItem = require('../src/standardItem.js')
+const AgedBrie = require('../src/agedBrie.js')
 
 describe("Gilded Rose", () => {
   let shop, vest, brie, elixir, sulfuras1, pass1, pass2, conjuredCake, conjuredCake2
   beforeEach(() => {
     vest = new StandardItem("+5 Dexterity Vest", 10, 20)
-    brie = new Item("Aged Brie", 2, 0)
+    brie = new AgedBrie("Aged Brie", 2, 0)
     elixir = new StandardItem("Elixir of the Mongoose", 5, 7)
     sulfuras1 = new Item("Sulfuras, Hand of Ragnaros", 0, 80)
     pass1 = new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20)
@@ -15,7 +16,7 @@ describe("Gilded Rose", () => {
     conjuredCake2 = new Item("Conjured Mana Cake", 1, 30)
 
     // shop = new Shop([vest, brie, elixir, sulfuras1, pass1, pass2, conjuredCake, conjuredCake2])
-    shop = new Shop([vest])
+    shop = new Shop([vest, brie, elixir])
   })
 
   fdescribe("+5 Dexterity Vest", () => {
@@ -65,7 +66,7 @@ describe("Gilded Rose", () => {
     })
   })
 
-  describe("Aged Brie", () => {
+  fdescribe("Aged Brie", () => {
     it("always decrease sellIn by 1", () => {
       const days = 1
       for (let i = 0; i < days; i++) {
@@ -112,7 +113,7 @@ describe("Gilded Rose", () => {
     })
   })
 
-  describe("Elixir of the Mongoose", () => {
+  fdescribe("Elixir of the Mongoose", () => {
     it("always decrease sellIn by 1", () => {
       const days = 5
       for (let i = 0; i < days; i++) {
