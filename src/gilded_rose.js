@@ -6,18 +6,21 @@ class Shop {
   updateQuality() {
     const standardItems = ['+5 Dexterity Vest', 'Elixir of the Mongoose']
     for (const item of this.items) {
-      if (standardItems.includes(item.name)) {
-        this.updateStandardItem(item)
-      } 
-      else if (item.name === 'Aged Brie') {
-        this.updateAgedBrie(item)
-      }
-      else if (item.name === 'Backstage passes to a TAFKAL80ETC concert') {
-        this.updateBackstagePass(item)
-      }
-      else if (item.name === 'Conjured Mana Cake') {
-        this.updateConjuredCake(item)
-      }
+      // console.log(item)
+      // console.log(typeof(item))
+      item.update()
+      // if (standardItems.includes(item.name)) {
+      //   this.updateStandardItem(item)
+      // } 
+      // else if (item.name === 'Aged Brie') {
+      //   this.updateAgedBrie(item)
+      // }
+      // else if (item.name === 'Backstage passes to a TAFKAL80ETC concert') {
+      //   this.updateBackstagePass(item)
+      // }
+      // else if (item.name === 'Conjured Mana Cake') {
+      //   this.updateConjuredCake(item)
+      // }
     }
 
     return this.items;
