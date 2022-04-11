@@ -1,4 +1,6 @@
-class BackstagePass extends standardItem {
+const StandardItem = require('./standardItem')
+
+class BackstagePass extends StandardItem {
   update() {
     if (this.quality < 50) {
       this.quality++
@@ -15,3 +17,4 @@ class BackstagePass extends standardItem {
     }
   }
 }
+module.exports = BackstagePass
