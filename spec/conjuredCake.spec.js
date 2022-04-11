@@ -4,7 +4,7 @@ describe('Conjured Cake', () => {
   let conjuredCake, conjuredCake2
   beforeEach(() => {
     conjuredCake = new ConjuredCake("Conjured Mana Cake", 3, 6)
-    conjuredCake2 = new ConjuredCake("Conjured Mana Cake", 1, 30)
+    conjuredCake2 = new ConjuredCake("Conjured Mana Cake", 0, 10)
   })
 
   it("always decrease sellIn by 1", () => {
@@ -35,12 +35,12 @@ describe('Conjured Cake', () => {
   })
 
   it("decreases quality -4 per day if sellIn is below 0", () => {
-    const days = 3
+    const days = 2
     for (let i = 0; i < days; i++) {
       conjuredCake2.update()
     }
     const result = conjuredCake2.quality
-    expect(result).toEqual(22)
+    expect(result).toEqual(2)
   })
 
   it("stops decreasing quality once the value 0 is reached", () => {

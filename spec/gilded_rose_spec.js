@@ -281,7 +281,7 @@ describe("Gilded Rose", () => {
         shop.updateQuality()
       }
       const result = conjuredCake2.quality
-      expect(result).toEqual(22)
+      expect(result).toEqual(20)
     })
 
     it("stops decreasing quality once the value 0 is reached", () => {
