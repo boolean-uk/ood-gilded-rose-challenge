@@ -1,66 +1,100 @@
 class Item {
-  constructor(name, sellIn, quality){
+  constructor(name, sellIn, quality) {
     this.name = name;
     this.sellIn = sellIn;
     this.quality = quality;
   }
 }
 
+class NormalItem extends Item {
+
+  updateDaily() {
+    this.sellIn -= 1;
+
+    if (this.quality > 0) {
+      this.quality -= 1;
+    }
+    if (this.sellIn < 0 && this.quality > 0) {
+      this.quality -= 1;
+    }
+  }
+}
+
+class AgedBrie extends Item {
+  constructor(sellIn, quality, name = "Aged Brie") {
+    super(name, sellIn, quality);
+  }
+  updateDaily() {
+    this.sellIn -= 1;
+
+    if (this.quality < 50) {
+      this.quality += 1;
+    }
+    if (this.sellIn < 0 && this.quality < 50) {
+      this.quality += 1;
+    }
+  }
+}
+
+class Sulfuras extends Item {
+  constructor(sellIn, quality, name = "Sulfuras, Hand of Ragnaros") {
+    super(name, sellIn, quality);
+  }
+  updateDaily() {}
+}
+
+class BackstagePasses extends Item {
+  updateDaily() {
+    this.sellIn -= 1;
+
+    if (this.sellIn < 0) {
+      this.quality = 0;
+      return;
+    }
+    if (this.quality < 50) {
+      this.quality += 1;
+    }
+    if (this.sellIn < 11 && this.quality < 50) {
+      this.quality += 1;
+    }
+    if (this.sellIn < 6 && this.quality < 50) {
+      this.quality += 1;
+    }
+  }
+}
+
+class Conjured extends Item {
+  updateDaily() {
+    this.sellIn -= 1;
+
+    if (this.quality === 1) {
+      this.quality--;
+    }
+    if (this.quality - 2 >= 0) {
+      this.quality -= 2;
+    }
+    if (this.sellIn < 0 && this.quality - 2 >= 0) {
+      this.quality -= 2;
+    }
+  }
+}
+
 class Shop {
-  constructor(items=[]){
+  constructor(items = []) {
     this.items = items;
   }
-  updateQuality() {
-    for (var i = 0; i < this.items.length; i++) {
-      if (this.items[i].name != 'Aged Brie' && this.items[i].name != 'Backstage passes to a TAFKAL80ETC concert') {
-        if (this.items[i].quality > 0) {
-          if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
-            this.items[i].quality = this.items[i].quality - 1;
-          }
-        }
-      } else {
-        if (this.items[i].quality < 50) {
-          this.items[i].quality = this.items[i].quality + 1;
-          if (this.items[i].name == 'Backstage passes to a TAFKAL80ETC concert') {
-            if (this.items[i].sellIn < 11) {
-              if (this.items[i].quality < 50) {
-                this.items[i].quality = this.items[i].quality + 1;
-              }
-            }
-            if (this.items[i].sellIn < 6) {
-              if (this.items[i].quality < 50) {
-                this.items[i].quality = this.items[i].quality + 1;
-              }
-            }
-          }
-        }
-      }
-      if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
-        this.items[i].sellIn = this.items[i].sellIn - 1;
-      }
-      if (this.items[i].sellIn < 0) {
-        if (this.items[i].name != 'Aged Brie') {
-          if (this.items[i].name != 'Backstage passes to a TAFKAL80ETC concert') {
-            if (this.items[i].quality > 0) {
-              if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
-                this.items[i].quality = this.items[i].quality - 1;
-              }
-            }
-          } else {
-            this.items[i].quality = this.items[i].quality - this.items[i].quality;
-          }
-        } else {
-          if (this.items[i].quality < 50) {
-            this.items[i].quality = this.items[i].quality + 1;
-          }
-        }
-      }
-    }
 
-    return this.items;
+  updateQuality() {
+    this.items.forEach((item) => item.updateDaily());
   }
 }
+
 module.exports = {
   Item,
-  Shop
-}
+  NormalItem,
+  AgedBrie,
+  Sulfuras,
+  Conjured,
+  BackstagePasses,
+  Shop,
+};
