@@ -1,6 +1,6 @@
-const UpgradableItem = require('./UpgradableItem')
+const UpdateableItem = require('./UpdateableItem')
 
-class AgedBrie extends UpgradableItem {
+class AgedBrie extends UpdateableItem {
   constructor (sellIn, quality) {
     super('Aged brie', sellIn, quality)
   }
