@@ -1,50 +1,14 @@
 const Item = require('../src/item')
 const Shop = require('../src/shop')
 
-fdescribe('Gilded Rose', () => {
+describe('Gilded Rose', () => {
   it('should foo', () => {
     const gildedRose = new Shop([new Item('foo', 0, 0)])
     const items = gildedRose.updateQuality()
     expect(items[0].name).toEqual('foo')
   })
 
-  it('returns true as item has a valid quality', () => {
-    // setup
-    const item = new Item('Aged Brie', 2, 0)
-    const gildedRose = new Shop()
-
-    // verify
-    expect(gildedRose.isValidQuality(item)).toEqual(true)
-  })
-
-  it('returns false as item has a invalid quality', () => {
-    // setup
-    const item = new Item('Sulfuras, Hand of Ragnaros', 0, 70)
-    const gildedRose = new Shop()
-
-    // verify
-    expect(gildedRose.isValidQuality(item)).toEqual(false)
-  })
-
-  it('returns false as item has quality less than 0', () => {
-    // setup
-    const item = new Item('Conjured Mana Cake', 3, -3)
-    const gildedRose = new Shop()
-
-    // verify
-    expect(gildedRose.isValidQuality(item)).toEqual(false)
-  })
-
-  it('returns false as item has quality more than 50', () => {
-    // setup
-    const item = new Item('Conjured Mana Cake', 3, 51)
-    const gildedRose = new Shop()
-
-    // verify
-    expect(gildedRose.isValidQuality(item)).toEqual(false)
-  })
-
-  it('decreases agedBries sellIn and increases quality', () =>{
+  it('decreases agedBries sellIn and increases quality', () => {
     // setup
     const agedBrie = new Item('Aged Brie', 2, 0)
     const gildedRose = new Shop([agedBrie])
@@ -55,9 +19,13 @@ fdescribe('Gilded Rose', () => {
     expect(gildedRose.items[0].quality).toEqual(1)
   })
 
-  it('decreases backstage sellIn and increases quality', () =>{
+  it('decreases backstage sellIn and increases quality', () => {
     // setup
-    const backstage = new Item('Backstage passes to a TAFKAL80ETC concert', 15, 20)
+    const backstage = new Item(
+      'Backstage passes to a TAFKAL80ETC concert',
+      15,
+      20
+    )
     const gildedRose = new Shop([backstage])
     gildedRose.updateQuality()
     // verify
@@ -65,9 +33,13 @@ fdescribe('Gilded Rose', () => {
     expect(gildedRose.items[0].quality).toEqual(21)
   })
 
-  it('decreases backstage sellIn and increases double of quality', () =>{
+  it('decreases backstage sellIn and increases double of quality', () => {
     // setup
-    const backstage = new Item('Backstage passes to a TAFKAL80ETC concert', 10, 20)
+    const backstage = new Item(
+      'Backstage passes to a TAFKAL80ETC concert',
+      10,
+      20
+    )
     const gildedRose = new Shop([backstage])
     gildedRose.updateQuality()
 
@@ -76,9 +48,13 @@ fdescribe('Gilded Rose', () => {
     expect(gildedRose.items[0].quality).toEqual(22)
   })
 
-  it('decreases backstage sellIn and increases triple of quality', () =>{
+  it('decreases backstage sellIn and increases triple of quality', () => {
     // setup
-    const backstage = new Item('Backstage passes to a TAFKAL80ETC concert', 5, 20)
+    const backstage = new Item(
+      'Backstage passes to a TAFKAL80ETC concert',
+      5,
+      20
+    )
     const gildedRose = new Shop([backstage])
     gildedRose.updateQuality()
 
@@ -87,9 +63,13 @@ fdescribe('Gilded Rose', () => {
     expect(gildedRose.items[0].quality).toEqual(23)
   })
 
-  it('decreases backstage sellIn and drops to quality 0', () =>{
+  it('decreases backstage sellIn and drops to quality 0', () => {
     // setup
-    const backstage = new Item('Backstage passes to a TAFKAL80ETC concert', 0, 20)
+    const backstage = new Item(
+      'Backstage passes to a TAFKAL80ETC concert',
+      0,
+      20
+    )
     const gildedRose = new Shop([backstage])
     gildedRose.updateQuality()
 
@@ -98,7 +78,7 @@ fdescribe('Gilded Rose', () => {
     expect(gildedRose.items[0].quality).toEqual(0)
   })
 
-  it('decreases double the quality since it is conjurted', () =>{
+  it('decreases double the quality since it is conjurted', () => {
     // setup
     const conjured = new Item('Conjured Mana Cake', 3, 6)
     const gildedRose = new Shop([conjured])
@@ -109,7 +89,7 @@ fdescribe('Gilded Rose', () => {
     expect(gildedRose.items[0].quality).toEqual(4)
   })
 
-  it('stops the quality to 0 after sellIn is lower than 0', () =>{
+  it('stops the quality to 0 after sellIn is lower than 0', () => {
     // setup
     const conjured = new Item('Conjured Mana Cake', -1, 0)
     const gildedRose = new Shop([conjured])

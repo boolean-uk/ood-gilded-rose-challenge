@@ -40,7 +40,6 @@ Shop
 - items @Array[@Item{name, sellIn, quality}]
   
 ### Methods
-isValidQuality():  The Quality of an item is never negative and is never more than 50 
 updateAgedBrie(): increase the item's quality by 1, after sellIn <= 0 it increase quality by 2
 updateBackstage(): it increases in quality as its SellIn value approaches.
    Quality increases by 2 when there are 10 days or less and by 3 when there are 5 days or less Quality drops to 0 after the concert
