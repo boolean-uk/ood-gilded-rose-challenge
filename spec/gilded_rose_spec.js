@@ -177,7 +177,7 @@ describe("Gilded Rose", () => {
     })
   })
 
-  fdescribe("Backstage passes to a TAFKAL80ETC concert", () => {
+  describe("Backstage passes to a TAFKAL80ETC concert", () => {
     it("always decrease sellIn by 1", () => {
       const days = 5
       for (let i = 0; i < days; i++) {
