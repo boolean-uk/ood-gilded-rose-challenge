@@ -177,7 +177,7 @@ describe("Gilded Rose", () => {
     })
   })
 
-  describe("Backstage passes to a TAFKAL80ETC concert", () => {
+  fdescribe("Backstage passes to a TAFKAL80ETC concert", () => {
     it("always decrease sellIn by 1", () => {
       const days = 5
       for (let i = 0; i < days; i++) {
@@ -212,15 +212,6 @@ describe("Gilded Rose", () => {
       }
       const result = pass1.quality
       expect(result).toEqual(29)
-    })
-
-    it("increases quality +2 per day if sellIn is 5 or less", () => {
-      const days = 12
-      for (let i = 0; i < days; i++) {
-        shop.updateQuality()
-      }
-      const result = pass1.quality
-      expect(result).toEqual(41)
     })
 
     it("increases quality +3 per day if sellIn is 5 or less", () => {
