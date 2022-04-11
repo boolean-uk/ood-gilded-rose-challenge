@@ -8,7 +8,12 @@ class Shop {
     for (const item of this.items) {
       if (standardItems.includes(item.name)) {
         this.updateStandardItem(item)
-      } else {
+      } 
+      else if (item.name === 'Aged Brie') {
+        this.updateAgedBrie(item)
+      }
+
+      else {
           if (item.name != 'Aged Brie' && item.name != 'Backstage passes to a TAFKAL80ETC concert') {
             if (item.quality > 0) {
               if (item.name != 'Sulfuras, Hand of Ragnaros') {
@@ -68,6 +73,16 @@ class Shop {
       item.quality--
       if (item.sellIn < 0) {
       item.quality--
+      }
+    }
+  }
+
+  updateAgedBrie(item) {
+    this.updateSellIn(item)
+    if (item.quality < 50) {
+      item.quality++
+      if (item.sellIn < 0) {
+      item.quality++
       }
     }
   }
