@@ -66,15 +66,9 @@ describe('Gilded Rose', function() {
         ]
 
         const shop = new Shop(items)
-        shop.updateQuality()
-        shop.updateQuality()
-        shop.updateQuality()
-        shop.updateQuality()
-        shop.updateQuality()
-        shop.updateQuality()
-        shop.updateQuality()
-        shop.updateQuality()
-        shop.updateQuality()
+        for (let j = 0; j < 9; j++) {
+            shop.updateQuality()
+        }
 
         let result = shop.updateQuality()
 
