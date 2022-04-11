@@ -8,7 +8,7 @@ class StandardItem extends Item {
   }
 
   updateSellIn() {
-    if (this.name !== 'Sulfuras, Hand of Ragnaros') this.sellIn-- 
+    if (this.name !== 'Sulfuras, Hand of Ragnaros') this.sellIn--
   }
 }
 

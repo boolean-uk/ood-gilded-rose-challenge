@@ -1,8 +1,6 @@
 const StandardItem = require('./standardItem')
 
 class Sulfuras extends StandardItem {
-  update() {
-
-  }
+  update() {}
 }
 module.exports = Sulfuras
