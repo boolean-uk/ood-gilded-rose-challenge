@@ -1,14 +1,14 @@
 const Item = require('../src/item.js')
-const Standard = require('../src/standard_items.js')
+const Shop = require('../src/shop.js')
 
 describe('standard items', function () {
   // TEST1
   it('sell-in and quality decreased by 1', function () {
     // setup
     const item = new Item('+5 Dexterity Vest', 5, 10)
-    const classStandard = new Standard()
+    const shop = new Shop([item])
     // execute
-    classStandard.updateStandard(item)
+    shop.updateQuality()
     // verify
     expect(item.name).toEqual('+5 Dexterity Vest')
     expect(item.sellIn).toEqual(4)
@@ -19,9 +19,9 @@ describe('standard items', function () {
   it('quality decreased twice as fast', function () {
     // setup
     const item = new Item('+5 Dexterity Vest', -1, 10)
-    const classStandard = new Standard()
+    const shop = new Shop([item])
     // execute
-    classStandard.updateStandard(item)
+    shop.updateQuality()
     // verify
     expect(item.name).toEqual('+5 Dexterity Vest')
     expect(item.sellIn).toEqual(-2)
@@ -32,9 +32,9 @@ describe('standard items', function () {
   it('quality never goes below 0', function () {
     // setup
     const item = new Item('+5 Dexterity Vest', 5, 0)
-    const classStandard = new Standard()
+    const shop = new Shop([item])
     // execute
-    classStandard.updateStandard(item)
+    shop.updateQuality()
     // verify
     expect(item.name).toEqual('+5 Dexterity Vest')
     expect(item.sellIn).toEqual(4)
