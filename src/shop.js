@@ -38,6 +38,10 @@ item.quality = item.quality - item.quality
 }
 }
 
+updateSulfuras(item) {
+    return 
+  }
+
   updateQuality() {
     for (var i = 0; i < this.items.length; i++) {
       const item = this.items[i]
