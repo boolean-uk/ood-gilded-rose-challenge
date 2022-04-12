@@ -1,10 +1,7 @@
 const Item = require('./Item.js')
-class Sulfuras extends Item{
-    constructor(name,quality,sellIn) {
-      super(name,quality,sellIn);
-     }
-     update() {
-       return this
-     }
+class Sulfuras extends Item {
+  update() {
+    return this
   }
-  module.exports =Sulfuras
+}
+module.exports = Sulfuras

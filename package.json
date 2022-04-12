@@ -48,5 +48,7 @@
       ]
     ],
     "plugins": []
-  }
+  },
+  "main": ".eslintrc.js",
+  "author": ""
 }
