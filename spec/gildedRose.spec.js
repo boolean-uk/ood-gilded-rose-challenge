@@ -1,9 +1,13 @@
 const Shop = require('../src/gilded_rose.js')
-const Item = require('../src/item.js')
+const Brie = require('../src/brie')
+const Backstage = require('../src/backstage.js')
+const Conjured = require('../src/conjured.js')
+const Normal = require('../src/normal.js')
+const Sulfurus = require('../src/sulfurus.js')
 
 describe('Aged Brie', () => {
   it('quality increases by 1', () => {
-    const agedBrie = new Item('Aged Brie', 4, 5)
+    const agedBrie = new Brie(4, 5)
     const items = [agedBrie]
     const shop = new Shop(items)
     shop.updateQuality()
@@ -13,7 +17,7 @@ describe('Aged Brie', () => {
   })
 
   it('quality increases by 2', () => {
-    const agedBrie = new Item('Aged Brie', 0, 5)
+    const agedBrie = new Brie(0, 5)
     const items = [agedBrie]
     const shop = new Shop(items)
     shop.updateQuality()
@@ -23,7 +27,7 @@ describe('Aged Brie', () => {
   })
 
   it('quality never more than 50', () => {
-    const agedBrie = new Item('Aged Brie', 4, 50)
+    const agedBrie = new Brie(4, 50)
     const items = [agedBrie]
     const shop = new Shop(items)
     shop.updateQuality()
@@ -35,69 +39,74 @@ describe('Aged Brie', () => {
 
 describe('Backstage passes to a TAFKAL80ETC concert', () => {
   it('quality increases by 1 if item quality < 50', () => {
-    const backstage = new Item(
-      'Backstage passes to a TAFKAL80ETC concert',
-      14,
-      24
-    )
+    const backstage = new Backstage(14, 24)
     const items = [backstage]
     const shop = new Shop(items)
     shop.updateQuality()
-
-    // shop.updateBackstagePass(backstage)
 
     expect(backstage.sellIn).toEqual(13)
     expect(backstage.quality).toEqual(25)
   })
 
   it('quality increases by 2 if item.sellIn < 11 ', () => {
-    const backstage = new Item(
-      'Backstage passes to a TAFKAL80ETC concert',
-      8,
-      29
-    )
+    const backstage = new Backstage(8, 29)
     const items = [backstage]
     const shop = new Shop(items)
     shop.updateQuality()
-
-    // shop.updateBackstagePass(backstage)
 
     expect(backstage.sellIn).toEqual(7)
     expect(backstage.quality).toEqual(31)
   })
 
   it('quality increases by 3 if item.sellIn < 6 ', () => {
-    const backstage = new Item(
-      'Backstage passes to a TAFKAL80ETC concert',
-      5,
-      35
-    )
+    const backstage = new Backstage(5, 35)
     const items = [backstage]
     const shop = new Shop(items)
     shop.updateQuality()
-
-    // shop.updateBackstagePass(backstage)
 
     expect(backstage.sellIn).toEqual(4)
     expect(backstage.quality).toEqual(38)
   })
 })
 
+describe('Conjured Mana Cake', () => {
+  it('quality decreases by 2 if item quality < 50', () => {
+    const conjured = new Conjured(14, 24)
+
+    const items = [conjured]
+    const shop = new Shop(items)
+    shop.updateQuality()
+
+    expect(conjured.sellIn).toEqual(13)
+    expect(conjured.quality).toEqual(22)
+  })
+
+  it('quality decreases by 4 if item.sellIn < 0 ', () => {
+    const conjured = new Conjured(0, 29)
+    const items = [conjured]
+    const shop = new Shop(items)
+    shop.updateQuality()
+
+    expect(conjured.sellIn).toEqual(-1)
+    expect(conjured.quality).toEqual(25)
+  })
+})
+
 describe('Gilded Rose', function () {
   it('Day 1: should update all items', function () {
     const startingItems = [
-      new Item('+5 Dexterity Vest', 10, 20),
-      new Item('Aged Brie', 2, 0),
-      new Item('Elixir of the Mongoose', 5, 7),
-      new Item('Sulfuras, Hand of Ragnaros', 0, 80),
-      new Item('Sulfuras, Hand of Ragnaros', -1, 80),
-      new Item('Backstage passes to a TAFKAL80ETC concert', 15, 20),
-      new Item('Backstage passes to a TAFKAL80ETC concert', 10, 49),
-      new Item('Backstage passes to a TAFKAL80ETC concert', 5, 49),
+      new Normal(10, 20),
+      new Brie(2, 0),
+      new Normal(5, 7),
+      new Sulfurus(0, 80),
+      new Sulfurus(-1, 80),
+      new Backstage(15, 20),
+      new Backstage(10, 49),
+      new Backstage(5, 49),
 
       // This Conjured item does not work properly yet
-      new Item('Conjured Mana Cake', 3, 6),
-      new Item('Conjured Mana Cake', 0, 6)
+      new Conjured(3, 6),
+      new Conjured(0, 6)
     ]
 
     const gildedRose = new Shop(startingItems)
@@ -137,17 +146,17 @@ describe('Gilded Rose', function () {
 
   it('Day 30: should update all items', function () {
     const startingItems = [
-      new Item('+5 Dexterity Vest', 10, 20),
-      new Item('Aged Brie', 2, 0),
-      new Item('Elixir of the Mongoose', 5, 7),
-      new Item('Sulfuras, Hand of Ragnaros', 0, 80),
-      new Item('Sulfuras, Hand of Ragnaros', -1, 80),
-      new Item('Backstage passes to a TAFKAL80ETC concert', 15, 20),
-      new Item('Backstage passes to a TAFKAL80ETC concert', 10, 49),
-      new Item('Backstage passes to a TAFKAL80ETC concert', 5, 49),
+      new Normal(10, 20),
+      new Brie(2, 0),
+      new Normal(5, 7),
+      new Sulfurus(0, 80),
+      new Sulfurus(-1, 80),
+      new Backstage(15, 20),
+      new Backstage(10, 49),
+      new Backstage(5, 49),
 
       // This Conjured item does not work properly yet
-      new Item('Conjured Mana Cake', 3, 6)
+      new Conjured(3, 6)
     ]
 
     const gildedRose = new Shop(startingItems)
