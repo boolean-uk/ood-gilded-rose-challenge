@@ -5,11 +5,14 @@ class AgedBrie extends UpdateableItem {
     super('Aged brie', sellIn, quality)
   }
 
+  getFactor() {
+    return this.sellIn < 0 ? 2 : 1
+  }
+
   updateQuality () {
     if (this.quality < 50) {
-      this.quality += 1
+      this.quality += 1 * this.getFactor()
     }
-    this.sellIn -= 1
   }
 }
 

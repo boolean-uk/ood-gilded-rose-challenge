@@ -12,11 +12,10 @@ class Pass extends UpdateableItem {
   }
 
   updateQuality () {
-    if (this.sellIn > 0) super.updateQuality()
+    if (this.sellIn > 0) return super.updateQuality()
     else {
-      this.sellIn -= 1
       this.quality = 0
-      return 0
+      return this.quality
     }
   }
 }

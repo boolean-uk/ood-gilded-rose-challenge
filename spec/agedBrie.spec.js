@@ -6,7 +6,7 @@ describe('Aged Brie', function () {
     item = new AgedBrie(10, 10)
   })
   it('increase quality over time', () => {
-    item.updateQuality()
+    item.update()
     expect(item.quality).toEqual(11)
     expect(item.sellIn).toEqual(9)
   })

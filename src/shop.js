@@ -4,7 +4,7 @@ class Shop {
   }
 
   updateQuality () {
-    this.items.forEach(item => item.updateQuality())
+    this.items.forEach(item => item.update())
     /* for (let i = 0; i < this.items.length; i++) {
       if (
         this.items[i].name !== 'Aged Brie' &&

@@ -5,7 +5,7 @@ class Sulfuras extends UpdateableItem {
     super('Sulfuras,' + name, sellIn, quality)
   }
 
-  updateQuality () {
+  update() {
     // do nothing
   }
 }
