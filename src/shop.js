@@ -1,8 +1,11 @@
-const AgedBrie = require('./aged_brie.js')
-const BackstagePass = require('./backstage_passes.js')
-const Conjured = require('./conjured.js')
+const updaters = {
+  'Aged Brie': require('./aged_brie.js'),
+  'Backstage passes to a TAFKAL80ETC concert': require('./backstage_passes.js'),
+  'Sulfuras, Hand of Ragnaros': require('./sulfuras.js'),
+  'Conjured Mana Cake': require('./conjured.js')
+}
+
 const Standard = require('./standard_items.js')
-const Sulfuras = require('./sulfuras.js')
 
 class Shop {
   constructor(items = []) {
@@ -10,24 +13,12 @@ class Shop {
   }
 
   updateQuality() {
-    const classAgedBrie = new AgedBrie()
-    const classBaskstage = new BackstagePass()
-    const classConjured = new Conjured()
-    const classStandard = new Standard()
-    const classSulfuras = new Sulfuras()
-
-    for (const item of this.items) {
-      if (item.name === 'Aged Brie') {
-        classAgedBrie.updateAgedBrie(item)
-      } else if (item.name.includes('Backstage')) {
-        classBaskstage.updateBackstagePass(item)
-      } else if (item.name.includes('Sulfuras')) {
-        classSulfuras.updateSulfuras(item)
-      } else if (item.name.includes('Conjured')) {
-        classConjured.updateConjured(item)
-      } else {
-        classStandard.updateStandard(item)
-      }
+    for (let i = 0; i < this.items.length; i++) {
+      const item = this.items[i]
+      const itemClass = updaters[item.name] || Standard
+      // eslint-disable-next-line new-cap
+      const itemInstance = new itemClass(item)
+      itemInstance.update()
     }
     return this.items
   }

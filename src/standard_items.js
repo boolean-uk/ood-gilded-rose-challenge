@@ -1,13 +1,17 @@
 class Standard {
-  updateStandard(item) {
-    if (item.quality === 0) {
-      item.sellIn--
-    } else if (item.sellIn < 0) {
-      item.sellIn--
-      item.quality -= 2
+  constructor(item) {
+    this.item = item
+  }
+
+  update() {
+    if (this.item.quality === 0) {
+      this.item.sellIn--
+    } else if (this.item.sellIn < 0) {
+      this.item.sellIn--
+      this.item.quality -= 2
     } else {
-      item.sellIn--
-      item.quality--
+      this.item.sellIn--
+      this.item.quality--
     }
   }
 }

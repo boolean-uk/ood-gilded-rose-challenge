@@ -1,17 +1,21 @@
 class BackstagePass {
-  updateBackstagePass(item) {
-    if (item.sellIn < 0) {
-      item.sellIn--
-      item.quality = 0
-    } else if (item.sellIn > 10) {
-      item.sellIn--
-      item.quality++
-    } else if (item.sellIn <= 10 && item.sellIn > 5) {
-      item.sellIn--
-      item.quality += 2
-    } else if (item.sellIn <= 5) {
-      item.sellIn--
-      item.quality += 3
+  constructor(item) {
+    this.item = item
+  }
+
+  update() {
+    if (this.item.sellIn < 0) {
+      this.item.sellIn--
+      this.item.quality = 0
+    } else if (this.item.sellIn > 10) {
+      this.item.sellIn--
+      this.item.quality++
+    } else if (this.item.sellIn <= 10 && this.item.sellIn > 5) {
+      this.item.sellIn--
+      this.item.quality += 2
+    } else if (this.item.sellIn <= 5) {
+      this.item.sellIn--
+      this.item.quality += 3
     }
   }
 }

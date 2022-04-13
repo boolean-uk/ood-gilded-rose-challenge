@@ -1,5 +1,5 @@
 class Sulfuras {
-  updateSulfuras(item) {
+  update(item) {
     return item
   }
 }
