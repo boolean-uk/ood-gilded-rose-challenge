@@ -1,6 +1,8 @@
-class Conjured {
-  constructor(item) {
-    this.item = item
+const Item = require('./item.js')
+
+class Conjured extends Item {
+  constructor(name, sellIn, quality) {
+    super(name, sellIn, quality)
   }
 
   updateQuality() {
@@ -16,3 +18,5 @@ class Conjured {
     }
   }
 }
+
+module.exports = Conjured
