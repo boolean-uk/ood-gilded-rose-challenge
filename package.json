@@ -34,7 +34,8 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-promise": "^5.1.1",
     "jasmine": "^3.2.0",
-    "prettier": "^2.6.2"
+    "prettier": "^2.6.2",
+    "typescript": "^5.1.6"
   },
   "babel": {
     "presets": [
