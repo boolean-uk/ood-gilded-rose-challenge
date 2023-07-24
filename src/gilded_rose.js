@@ -1,6 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Shop = exports.ConjuredItem = exports.BackstagePassesItem = exports.SulfurasItem = exports.AgedBrieItem = exports.StandardItem = exports.Item = void 0;
+const MAX_QUALITY = 50;
+const MIN_QUALITY = 0;
+const BACKSTAGE_PASS_QUALITY_STEP_1 = 3;
+const BACKSTAGE_PASS_QUALITY_STEP_2 = 2;
+const BACKSTAGE_PASS_SELLIN_THRESHOLD_1 = 10;
+const BACKSTAGE_PASS_SELLIN_THRESHOLD_2 = 5;
+// Utility function to handle quality boundary conditions
+function clampQuality(quality) {
+    return Math.min(MAX_QUALITY, Math.max(MIN_QUALITY, quality));
+}
 class Item {
     constructor(_name, _sellIn, _quality) {
         this._name = _name;
@@ -10,40 +20,27 @@ class Item {
     get quality() {
         return this._quality;
     }
-    set quality(value) {
-        this._quality = value;
-    }
     get sellIn() {
         return this._sellIn;
     }
-    set sellIn(value) {
-        this._sellIn = value;
-    }
     get name() {
         return this._name;
-    }
-    set name(value) {
-        this._name = value;
     }
 }
 exports.Item = Item;
 class StandardItem extends Item {
     updateQuality() {
-        this.sellIn <= 0 ? (this.quality -= 2) : this.quality--;
-        this.sellIn--;
-        if (this.quality < 0) {
-            this.quality = 0;
-        }
+        this._sellIn <= 0 ? (this._quality -= 2) : this._quality--;
+        this._sellIn--;
+        this._quality = clampQuality(this._quality);
     }
 }
 exports.StandardItem = StandardItem;
 class AgedBrieItem extends Item {
     updateQuality() {
-        this.quality++;
-        this.sellIn--;
-        if (this.quality > 50) {
-            this.quality = 50;
-        }
+        this._quality++;
+        this._sellIn--;
+        this._quality = clampQuality(this._quality);
     }
 }
 exports.AgedBrieItem = AgedBrieItem;
@@ -59,22 +56,20 @@ class BackstagePassesItem extends Item {
         super('Backstage passes to a TAFKAL80ETC concert', sellIn, quality);
     }
     updateQuality() {
-        if (this.sellIn > 10) {
-            this.quality++;
+        if (this._sellIn > BACKSTAGE_PASS_SELLIN_THRESHOLD_1) {
+            this._quality += BACKSTAGE_PASS_QUALITY_STEP_1;
         }
-        else if (this.sellIn > 5) {
-            this.quality += 2;
+        else if (this._sellIn > BACKSTAGE_PASS_SELLIN_THRESHOLD_2) {
+            this._quality += BACKSTAGE_PASS_QUALITY_STEP_2;
         }
-        else if (this.sellIn > 0) {
-            this.quality += 3;
+        else if (this._sellIn > 0) {
+            this._quality += 1;
         }
         else {
-            this.quality = 0;
+            this._quality = 0;
         }
-        this.sellIn--;
-        if (this.quality > 50) {
-            this.quality = 50;
-        }
+        this._sellIn--;
+        this._quality = clampQuality(this._quality);
     }
 }
 exports.BackstagePassesItem = BackstagePassesItem;
@@ -83,11 +78,9 @@ class ConjuredItem extends Item {
         super('Conjured Mana Cake', sellIn, quality);
     }
     updateQuality() {
-        this.sellIn <= 0 ? (this.quality -= 4) : (this.quality -= 2);
-        this.sellIn--;
-        if (this.quality < 0) {
-            this.quality = 0;
-        }
+        this._sellIn <= 0 ? (this._quality -= 4) : (this._quality -= 2);
+        this._sellIn--;
+        this._quality = clampQuality(this._quality);
     }
 }
 exports.ConjuredItem = ConjuredItem;
@@ -96,8 +89,8 @@ class Shop {
         this.items = items;
     }
     updateQualityOfItems() {
-        for (let i = 0; i < this.items.length; i++) {
-            this.items[i].updateQuality();
+        for (const item of this.items) {
+            item.updateQuality();
         }
         return this.items;
     }

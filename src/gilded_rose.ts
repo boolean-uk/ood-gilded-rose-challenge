@@ -1,24 +1,29 @@
+const MAX_QUALITY = 50;
+const MIN_QUALITY = 0;
+const BACKSTAGE_PASS_QUALITY_STEP_1 = 1;
+const BACKSTAGE_PASS_QUALITY_STEP_2 = 2;
+const BACKSTAGE_PASS_QUALITY_STEP_3 = 3;
+const BACKSTAGE_PASS_SELLIN_THRESHOLD_1 = 10;
+const BACKSTAGE_PASS_SELLIN_THRESHOLD_2 = 5;
+
+// Utility function to handle quality boundary conditions
+function clampQuality(quality: number): number {
+  return Math.min(MAX_QUALITY, Math.max(MIN_QUALITY, quality));
+}
+
 export abstract class Item {
-  constructor(private _name: string, private _sellIn: number, private _quality: number) {
-  }
+  constructor(protected readonly _name: string, protected _sellIn: number, protected _quality: number) {}
 
   public get quality(): number {
     return this._quality
   }
-  public set quality(value: number) {
-    this._quality = value
-  }
+
   public get sellIn(): number {
     return this._sellIn
   }
-  public set sellIn(value: number) {
-    this._sellIn = value
-  }
+
   public get name(): string {
     return this._name
-  }
-  public set name(value: string) {
-    this._name = value
   }
 
   public abstract updateQuality(): void
@@ -26,21 +31,17 @@ export abstract class Item {
 
 export class StandardItem extends Item {
   public override updateQuality(): void {
-    this.sellIn <= 0 ? (this.quality -= 2) : this.quality--
-    this.sellIn--
-    if (this.quality < 0) {
-      this.quality = 0
-    }
+    this._sellIn <= 0 ? (this._quality -= 2) : this._quality--;
+    this._sellIn--;
+    this._quality = clampQuality(this._quality);
   }
 }
 
 export class AgedBrieItem extends Item {
   public override updateQuality(): void {
-    this.quality++
-    this.sellIn--
-    if (this.quality > 50) {
-      this.quality = 50
-    }
+    this._quality++;
+    this._sellIn--;
+    this._quality = clampQuality(this._quality);
   }
 }
 
@@ -58,19 +59,17 @@ export class BackstagePassesItem extends Item {
   }
 
   public override updateQuality(): void {
-    if (this.sellIn > 10) {
-      this.quality++
-    } else if (this.sellIn > 5) {
-      this.quality += 2
-    } else if (this.sellIn > 0) {
-      this.quality += 3
+    if (this._sellIn > BACKSTAGE_PASS_SELLIN_THRESHOLD_1) {
+      this._quality += BACKSTAGE_PASS_QUALITY_STEP_1;
+    } else if (this._sellIn > BACKSTAGE_PASS_SELLIN_THRESHOLD_2) {
+      this._quality += BACKSTAGE_PASS_QUALITY_STEP_2;
+    } else if (this._sellIn > 0) {
+      this._quality += BACKSTAGE_PASS_QUALITY_STEP_3;
     } else {
-      this.quality = 0
+      this._quality = 0;
     }
-    this.sellIn--
-    if (this.quality > 50) {
-      this.quality = 50
-    }
+    this._sellIn--;
+    this._quality = clampQuality(this._quality);
   }
 }
 
@@ -80,11 +79,9 @@ export class ConjuredItem extends Item {
   }
 
   public override updateQuality(): void {
-    this.sellIn <= 0 ? (this.quality -= 4) : (this.quality -= 2)
-    this.sellIn--
-    if (this.quality < 0) {
-      this.quality = 0
-    }
+    this._sellIn <= 0 ? (this._quality -= 4) : (this._quality -= 2);
+    this._sellIn--;
+    this._quality = clampQuality(this._quality);
   }
 }
 
@@ -95,9 +92,9 @@ export class Shop {
   }
 
   updateQualityOfItems(): Item[] {
-    for (let i = 0; i < this.items.length; i++) {
-      this.items[i].updateQuality()
+    for (const item of this.items) {
+      item.updateQuality();
     }
-    return this.items
+    return this.items;
   }
 }
