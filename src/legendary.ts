@@ -1,6 +1,6 @@
-import { item } from "./item";
+import { Item } from "./item";
 
-export class Legendary implements item {
+export class Legendary implements Item {
     name : string;
     sellIn : number;
     quality : number;

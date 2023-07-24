@@ -1,6 +1,6 @@
-import { item } from "./item";
+import { Item } from "./item";
 
-export class Connjured implements item {
+export class Connjured implements Item {
     name : string;
     sellIn : number;
     quality : number;

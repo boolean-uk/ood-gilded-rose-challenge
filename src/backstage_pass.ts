@@ -1,6 +1,6 @@
-import { item } from "./item";
+import { Item } from "./item";
 
-export class Backstage_pass implements item {
+export class Backstage_pass implements Item {
     name : string;
     sellIn : number;
     quality : number;

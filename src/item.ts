@@ -1,4 +1,4 @@
-export interface item {
+export interface Item {
     name : string;
     quality : number;
     sellIn : number;

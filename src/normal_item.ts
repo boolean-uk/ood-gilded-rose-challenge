@@ -1,6 +1,6 @@
-import { item } from "./item";
+import { Item } from "./item";
 
-export class Normal_item implements item {
+export class Normal_Item implements Item {
     name : string;
     sellIn : number;
     quality : number;
