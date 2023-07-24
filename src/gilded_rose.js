@@ -95,27 +95,31 @@ class Shop {
 }
 
 const shop = new Shop(items)
-console.log(shop.items)
+// console.log(shop.items)
+shop.updateQuality()
+// console.log(shop.items)
+shop.updateQuality()
+// console.log(shop.items)
 shop.updateQuality()
 console.log(shop.items)
-shop.updateQuality()
-console.log(shop.items)
-shop.updateQuality()
-console.log(shop.items)
-shop.updateQuality()
-console.log(shop.items)
-shop.updateQuality()
-console.log(shop.items)
-shop.updateQuality()
-console.log(shop.items)
-shop.updateQuality()
-console.log(shop.items)
-shop.updateQuality()
-console.log(shop.items)
+// shop.updateQuality()
+// console.log(shop.items)
+// shop.updateQuality()
+// console.log(shop.items)
+// shop.updateQuality()
+// console.log(shop.items)
+// shop.updateQuality()
+// console.log(shop.items)
+// shop.updateQuality()
+// console.log(shop.items)
 
 
 
 module.exports = {
   Item,
-  Shop
+  Shop, 
+  BasicItem,
+  AgedBrie, 
+  Sulfuras, 
+  BackstagePasses
 }
