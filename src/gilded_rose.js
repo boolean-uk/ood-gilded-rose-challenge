@@ -4,13 +4,26 @@ class Item {
     this.sellIn = sellIn;
     this.quality = quality;
   }
+
+  // updateQuality() { }
 }
+
+// class StandardItem {
+//   constructor(name, sellIn, quality) {
+//     super(name, sellIn, quality);
+//   }
+
+//   updateQuality() {
+//     this.sellIn -= 1;
+//     this.quality -= 1;
+//   }
+// } 
 
 class Shop {
   constructor(items=[]){
     this.items = items;
   }
-  updateQuality() {
+  updateQualityOfItems() {
     for (var i = 0; i < this.items.length; i++) {
       if (this.items[i].name != 'Aged Brie' && this.items[i].name != 'Backstage passes to a TAFKAL80ETC concert') {
         if (this.items[i].quality > 0) {
