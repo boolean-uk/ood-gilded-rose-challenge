@@ -23,6 +23,10 @@
   "prettier": "@boolean-uk/boolean-prettier-config",
   "devDependencies": {
     "@boolean-uk/boolean-prettier-config": "^1.0.2",
+    "@types/jest": "^29.5.3",
+    "@types/node": "^20.4.4",
+    "@typescript-eslint/eslint-plugin": "^6.1.0",
+    "@typescript-eslint/parser": "^6.1.0",
     "babel-core": "^6.26.0",
     "babel-preset-env": "1.7.0",
     "babel-register": "^6.26.0",
@@ -34,7 +38,8 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-promise": "^5.1.1",
     "jasmine": "^3.2.0",
-    "prettier": "^2.6.2"
+    "prettier": "^2.6.2",
+    "typescript": "^5.1.6"
   },
   "babel": {
     "presets": [
