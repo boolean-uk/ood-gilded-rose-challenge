@@ -1,3 +1,5 @@
+// TODO zmienic plik na ts, usunąc item, zmienic w shop w costructorze z tablicy items na tablice item, 
+
 class Item {
   constructor(name, sellIn, quality){
     this.name = name;
@@ -59,8 +61,10 @@ class Shop {
 
     return this.items;
   }
+
 }
 module.exports = {
   Item,
   Shop
 }
+
