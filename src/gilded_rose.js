@@ -53,8 +53,6 @@ class BackstagePassesItem extends Item {
   }
 
   updateQuality() {
-    console.log("sellIn: ", this.sellIn)
-    console.log("quality: ", this.quality)
     if (this.sellIn > 10) {
       this.quality++;
     } else if (this.sellIn > 5) {
@@ -67,6 +65,20 @@ class BackstagePassesItem extends Item {
     this.sellIn--;
     if (this.quality > 50) {
       this.quality = 50;
+    } 
+  }
+} 
+
+class ConjuredItem extends Item {
+  constructor(sellIn, quality) {
+    super("Conjured Mana Cake", sellIn, quality);
+  }
+
+  updateQuality() {
+    this.sellIn <= 0 ? this.quality -= 4 : this.quality -= 2;
+    this.sellIn--;
+    if (this.quality < 0) {
+      this.quality = 0;
     } 
   }
 } 
@@ -88,5 +100,6 @@ module.exports = {
   AgedBrieItem,
   SulfurasItem,
   BackstagePassesItem,
+  ConjuredItem,
   Shop
 }

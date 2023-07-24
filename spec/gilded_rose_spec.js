@@ -1,4 +1,4 @@
-var {Shop, Item, StandardItem, AgedBrieItem, SulfurasItem, BackstagePassesItem} = require('../src/gilded_rose.js');
+var {Shop, Item, StandardItem, AgedBrieItem, SulfurasItem, BackstagePassesItem, ConjuredItem} = require('../src/gilded_rose.js');
 describe("updateQuality", function() {
 
   it("should decrease standard item quality and sellIn by 1", function() {
@@ -7,10 +7,22 @@ describe("updateQuality", function() {
     expect(items[0]).toEqual(new StandardItem("foo", 9, 9));
   });
 
+  it("should decrease Conjured item quality by 2 and sellIn by 1", function() {
+    const gildedRose = new Shop([ new ConjuredItem(10, 10) ]);
+    const items = gildedRose.updateQualityOfItems();
+    expect(items[0]).toEqual(new ConjuredItem(9, 8));
+  });
+
   it("should decrease standard item quality by 2 and sellIn by 1 after sellByDate", function() {
     const gildedRose = new Shop([ new StandardItem("foo", 0, 10) ]);
     const items = gildedRose.updateQualityOfItems();
     expect(items[0]).toEqual(new StandardItem("foo", -1, 8));
+  });
+
+  it("should decrease Conjured item quality by 4 and sellIn by 1 after sellByDate", function() {
+    const gildedRose = new Shop([ new ConjuredItem(0, 10) ]);
+    const items = gildedRose.updateQualityOfItems();
+    expect(items[0]).toEqual(new ConjuredItem(-1, 6));
   });
 
   it("should not decrease item quality beyond 0", function() {
