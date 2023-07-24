@@ -8,6 +8,23 @@ class Item {
 }
 
 class BasicItem extends Item {
+
+
+  constructor(name, sellIn, quality,conjurned) {
+    super(name,sellIn,quality)
+    this.conjurned=conjurned
+    if(conjurned)
+    {
+      this.mulitplier=2
+    }
+    else
+    {
+      this.mulitplier=1
+    }
+
+  }
+   
+  
   updateQuality() {
     if (this.sellIn > 0) {
       this.sellIn--
@@ -19,10 +36,11 @@ class BasicItem extends Item {
   }
 
   decreaseQuality(number) {
+    
     if (this.quality - number < 0) {
       this.quality = 0
     } else {
-      this.quality -= number
+      this.quality -= number * this.mulitplier
     }
   }
 
@@ -48,8 +66,7 @@ class AgedBrie extends BasicItem {
 
 class Sulfuras extends BasicItem {
   updateQuality()
-  {
-
+  { 
   }
 }
 
