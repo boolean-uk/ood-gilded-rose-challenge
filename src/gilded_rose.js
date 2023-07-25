@@ -3,8 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Shop = exports.ConjuredItem = exports.BackstagePassesItem = exports.SulfurasItem = exports.AgedBrieItem = exports.StandardItem = exports.Item = void 0;
 const MAX_QUALITY = 50;
 const MIN_QUALITY = 0;
-const BACKSTAGE_PASS_QUALITY_STEP_1 = 3;
+const BACKSTAGE_PASS_QUALITY_STEP_1 = 1;
 const BACKSTAGE_PASS_QUALITY_STEP_2 = 2;
+const BACKSTAGE_PASS_QUALITY_STEP_3 = 3;
 const BACKSTAGE_PASS_SELLIN_THRESHOLD_1 = 10;
 const BACKSTAGE_PASS_SELLIN_THRESHOLD_2 = 5;
 // Utility function to handle quality boundary conditions
@@ -63,7 +64,7 @@ class BackstagePassesItem extends Item {
             this._quality += BACKSTAGE_PASS_QUALITY_STEP_2;
         }
         else if (this._sellIn > 0) {
-            this._quality += 1;
+            this._quality += BACKSTAGE_PASS_QUALITY_STEP_3;
         }
         else {
             this._quality = 0;
